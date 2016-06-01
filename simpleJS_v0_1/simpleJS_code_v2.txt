@@ -1,0 +1,39 @@
+// an example of 1 page app that converts radians into degrees
+
+var simpleJS = require('simpleJS');
+
+var app = simpleJS.newApp();
+
+// add a menu, a title, ...
+// ...
+
+app.add( [{type:PANEL,name:"mainPanel",[
+		{type:LABEL,text:"radians"},
+		{type:TEXTFIELD,name:"rad",text:"15"},
+
+		{type:BUTTON,name:"btn",text:"convert"},
+
+		{type:LABEL,text:"degrees"},
+		{type:TEXTFIELD,name:"deg",text:"",readOnly:true},
+		]}
+	]);
+
+
+app.onStart( function(){
+	// create objects to represent app state
+	this.someData = 1000;
+	this.someData2 = "abc";
+});
+
+app.onClick("btn",function(evt){
+	// read from textfield, compute conversion, write in other textfield
+});
+
+
+app.onSuspend(function(){
+	// ...	db stuff to make app persistent
+});
+
+app.onResume(function(){
+	// ...	db stuff to resume the app
+});
