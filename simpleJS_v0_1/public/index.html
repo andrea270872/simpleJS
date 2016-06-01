@@ -1,0 +1,69 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="someSillyStyle.css">
+  <script src="/socket.io/socket.io.js"></script>
+
+  <title>experiment</title>
+</head>
+<body>
+<h1>experiment</h1>
+
+<div class="PANEL" id="mainPanel">
+    <span class="LABEL" id="label1">radians</span>
+	<input class="TEXTFIELD" id="textfield1" name="rad" type="text" value="15"/>
+
+	<div class="SEPARATOR"/>
+
+    <button class="BUTTON" id="btn" type="button">convert</button>
+
+	<div class="SEPARATOR"/>
+
+    <span class="LABEL" id="label2">degrees</span>
+	<input class="TEXTFIELD" id="textfield2" name="deg" type="text" readonly></input>
+</div>
+
+
+
+
+<script>
+
+/*
+app.add( [{type:PANEL,name:"mainPanel",[
+		{type:LABEL,text:"radians"},
+		{type:TEXTFIELD,name:"rad",text:"15"},
+
+		{type:BUTTON,name:"btn",text:"convert"},
+
+		{type:LABEL,text:"degrees"},
+		{type:TEXTFIELD,name:"deg",text:"",readOnly:true},
+		]}
+	]);
+*/
+
+var socket = io.connect('/');
+var myId = 0;
+socket.on('yourId', function(data){
+	myId = data.id;
+	console.log( 'got my id = ' + myId);
+});
+
+
+
+
+document.getElementById("btn").addEventListener("click", function(evt){
+    console.log("guiEvent bnt clicked");
+	socket.emit('guiEvent', {event:evt,targetName: 'btn',
+							rad: parseFloat(document.getElementsByName("rad")[0].value) });
+});
+
+socket.on('update', function(data){
+	console.log( 'some data that got refreshed = ' + data);
+	var t = document.getElementsByName("deg")[0];
+	t.value = data.deg;
+});
+
+</script>
+
+</body>
+</html>
+
