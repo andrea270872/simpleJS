@@ -33,3 +33,13 @@ I was thinking along the lines of a small embedded language in js where you defi
  
 Perhaps a tool for this could be:
 - PEGjs  https://joeriks.com/2014/01/14/a-simple-dsl-code-generation-using-node/ which work with node.js
+
+==================================
+
+19:02 01/06/2016
+
+Suppose I don't care about making a web application, but I want to have a GUI for my simple JavaScript
+code, and have access to the local filesystem as well as to the GUI...
+And code as little as possible...
+How can I do it?
+
