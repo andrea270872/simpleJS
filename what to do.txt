@@ -1,0 +1,4 @@
+Generate GUI from angular components from a template + 
+generate the js code for both the client and the server (in the nodejs)
+
+

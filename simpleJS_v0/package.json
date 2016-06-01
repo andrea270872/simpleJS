@@ -1,0 +1,12 @@
+{
+"name": "simpleJSapp",
+"version": "0.0.1",
+"description": "A simple javascript embedded language to define local-running web applications",
+"author": "Andrea Valente <anva@mmmi.sdu.dk>",
+"scripts": {
+	"start": "node simpleJSapp.js"
+  },
+  "dependencies": {
+    "fs": "*"
+  }
+}

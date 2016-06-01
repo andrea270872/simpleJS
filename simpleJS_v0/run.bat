@@ -1,0 +1,2 @@
+node simpleJSapp.js
+pause
