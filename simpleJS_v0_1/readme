@@ -1,0 +1,26 @@
+19:02 01/06/2016
+
+Suppose I don't care about making a web application, but I want to have a GUI for my simple JavaScript
+code, and have access to the local filesystem as well as to the GUI...
+And code as little as possible...
+How can I do it?
+
+==============
+
+21:45 01/06/2016
+This example was manually generated to see how the coupling between the pseudo-code in "simpleJS_code_v2.txt"
+and an actual web-app could be. 
+This experiment is written as a small Express server, that opens its own client (a static HTML page),
+then the 2 talk via websockets.
+A very basic CSS is added to show how the GUI could look like.
+
+The dependencies of the application should be installed first with:
+   npm install
+then 
+   npm start
+will start both server and a single client.
+
+For Windows users, the 2 batch files do that for you.
+
+
+(the folder node_modules can be removed to clean; all packages will be automatically reinstalled)
