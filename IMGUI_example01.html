@@ -1,0 +1,129 @@
+<html>
+  <head>
+    <title>ImmediateModeGUI</title>
+  </head>
+  <body>
+    <h1>Animation as a State Machine</h1>
+
+<canvas id="canvas" width="600" height="400"></canvas>
+<div id="clickedAt"></div>
+<div id="output"></div>
+
+<script>
+// Andrea Valente
+// based on https://mollyrocket.com/861
+// and http://www.cse.chalmers.se/edu/year/2011/course/TDA361/Advanced%20Computer%20Graphics/IMGUI.pdf
+
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var width = canvas.width;
+var height= canvas.height;
+	
+var GUI_uic = {
+	hot: -1,
+	active: -1,
+	mouse: {},
+	changed: true
+	}; // UIContext
+
+canvas.addEventListener('mousemove', function(evt) {
+	evt.preventDefault();
+	var rect = canvas.getBoundingClientRect();
+	GUI_uic.mouse.pos = {
+		x: evt.clientX - rect.left,
+		y: evt.clientY - rect.top
+	};
+	GUI_uic.changed = true;
+});
+canvas.addEventListener('mousedown', function(evt) {
+	evt.preventDefault();
+	GUI_uic.mouse.down = true;
+	GUI_uic.changed = true;
+});
+canvas.addEventListener('mouseup', function(evt) {
+	evt.preventDefault();
+	GUI_uic.mouse.up = true;
+	GUI_uic.changed = true;
+});
+	
+// -----------------------------------------------------
+var doButton = function(uic,myid,caption,x,y,w,h){
+	// draw the button ========================
+	ctx.fillStyle = "cyan";
+	ctx.fillRect(x,y,w,h);
+	ctx.strokeStyle = "blue";
+	ctx.strokeRect(x,y,w,h);
+	
+	ctx.font = "22px Arial";
+	ctx.fillStyle = "black";
+	ctx.strokeStyle = "black";
+	ctx.fillText(caption,x,y+h-22);
+	//console.log(x,y,caption);
+	
+	// decide what to do =====================
+	result = false;
+	//console.log(uic);
+	if (uic && uic.active==myid){
+		if (uic.mouse.up){
+			if (uic.hot==myid){
+				result = true;
+				uic.hot = -1;
+			}
+		}
+	} else if (uic.hot==myid){
+		if (uic.mouse.down){
+			uic.active = myid;
+		}
+	}	
+	
+	if (uic.mouse.pos){
+		// inside rect?
+		if ( (uic.mouse.pos.x>=x) && (uic.mouse.pos.x<=x+w) &&
+			(uic.mouse.pos.y>=y) && (uic.mouse.pos.y<=y+h) ){
+			uic.hot = myid;
+		}
+	}
+	return result;
+}
+// ------------------------------------------------------
+
+function loop(uic){
+
+	function _draw(uic){
+		if (!uic.changed) return;
+		// clear canvas
+		ctx.fillStyle = "lightgray";
+		ctx.fillRect(0,0, width, height);
+		
+		if (doButton(uic,001,"Click me",100,100,120,50)){
+			console.log("button 1 pressed");
+			document.getElementById("output").innerHTML += '<br/>button 1 pressed';
+		}
+
+		if (doButton(uic,002,"Not me",150,300,120,50)){
+			console.log("button 2 pressed");
+			document.getElementById("output").innerHTML += '<br/>button 2 pressed';
+		}
+		
+		doButton(uic,003,"AAA",400,100,120,50)
+	}
+
+	_draw(uic);
+	
+	if (running){
+		uic.mouse = {}; // reset mouse pos and state
+		uic.changed = false;
+		setTimeout(function(){loop(uic);}, 200); // non-blocking call
+	}
+}
+
+// ------- MAIN --------
+
+var running = true;
+var someData = 10;
+loop(GUI_uic);
+
+// --------------------------------
+    </script>
+  </body>
+</html>
