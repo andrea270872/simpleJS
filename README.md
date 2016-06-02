@@ -43,3 +43,27 @@ code, and have access to the local filesystem as well as to the GUI...
 And code as little as possible...
 How can I do it?
 
+==================================
+
+2-may-2016
+
+After a cool discussion with a friend I got introduced to the concept of "immediate mode GUI" and I tried a quick
+example of that in JavaScript.
+I read/watched these:
+- https://mollyrocket.com/861
+- http://www.cse.chalmers.se/edu/year/2011/course/TDA361/Advanced%20Computer%20Graphics/IMGUI.pdf
+- https://en.wikipedia.org/wiki/Immediate_mode_(computer_graphics)
+and I coded the example in IMGUI_example01.html
+
+How can I do it?
+
+==================================
+
+11:24 02-06-2016
+
+Regardless what style GUI I will end up using, for the simpleJS programming I would like developers to feel free
+to work as it was done in visualBasic or Borland C++ all those years ago :D
+Here the GUI is just a small dynamic HTML page, and the rest of my app is javascript running on node (so I can use local resources which I cannot in the browser). 
+I think I can use the same trick as Angular, with a state object, passing it around from client to server perhaps via sockets...
+I'm working on "simpleJS v0_2" to test this idea.
+I would like to see how much simpler my code/my life can be to make small applications, and forget about the GUI details.
